@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rishabh Singh - Data Science Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-bg: #0A192F;
+            --secondary-bg: #112240;
+            --text-primary: #FFFFFF;
+            --text-secondary: #CCCCCC;
+            --accent-blue: #00FFFF;
+            --accent-magenta: #A500FF;
+            --accent-gradient: linear-gradient(135deg, #00FFFF, #A500FF);
+            --card-bg: rgba(17, 34, 64, 0.7);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--primary-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-gradient);
+            border-radius: 5px;
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Particle Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        /* Header */
+        header {
+            padding: 1rem 5%;
+            background-color: rgba(10, 25, 47, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 255, 255, 0.1);
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+        }
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--accent-gradient);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF; }
+            to { text-shadow: 0 0 20px #A500FF, 0 0 30px #A500FF; }
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--accent-gradient);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(165, 0, 255, 0.4);
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* 3D Robot Assistant */
+        .robot-3d-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 120px;
+            height: 120px;
+            z-index: 99;
+            perspective: 1000px;
+        }
+        .robot-3d {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+            cursor: pointer;
+        }
+        .robot-head {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            border-radius: 20px;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            border: 2px solid var(--accent-blue);
+        }
+        .robot-eyes {
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+        }
+        .robot-eye {
+            width: 15px;
+            height: 15px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 10px var(--accent-blue);
+        }
+        .robot-pupil {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #000;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.1s ease-out;
+        }
+        .robot-mouth {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 5px;
+            background: var(--accent-magenta);
+            border-radius: 5px;
+            animation: speak 2s infinite;
+        }
+        @keyframes speak {
+            0%, 100% { height: 5px; }
+            50% { height: 10px; }
+        }
+        .robot-body {
+            position: absolute;
+            width: 60px;
+            height: 40px;
+            background: linear-gradient(135deg, #2a5298, #1e3c72);
+            border-radius: 10px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px rgba(165, 0, 255, 0.3);
+            border: 2px solid var(--accent-magenta);
+        }
+        .robot-antenna {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: var(--accent-blue);
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .robot-antenna::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-magenta);
+            border-radius: 50%;
+            top: -4px;
+            left: -3px;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+        }
+
+        /* Robot Popup */
+        .robot-popup {
+            position: fixed;
+            bottom: 160px;
+            right: 30px;
+            width: 350px;
+            background: var(--secondary-bg);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            z-index: 100;
+            display: none;
+            animation: fadeInUp 0.3s ease-out;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .robot-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .robot-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+        }
+        .robot-avatar i {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+        .robot-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .robot-message {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .robot-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 160px;
+            left: 30px;
+            z-index: 98;
+        }
+        .scroll-indicator i {
+            font-size: 2rem;
+            color: var(--accent-blue);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 5%;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            color: var(--text-primary);
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-gradient);
+        }
+
+        /* About Section */
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+        .about-text {
+            flex: 1;
+        }
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+        .about-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+        .about-image img {
+            width: 300px;
+            height: 300px;
+            border-radius: 10px;
+            border: 2px solid var(--accent-blue);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            object-fit: cover;
+        }
+        .about-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .about-image:hover .about-image-overlay {
+            opacity: 1;
+        }
+        .change-photo-btn {
+            background: var(--accent-gradient);
+            color: var(--text-primary);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .skill-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
+        }
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .skill-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        .skill-list {
+            list-style: none;
+            color: var(--text-secondary);
+        }
+        .skill-list li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 20px;
+        }
+        .skill-list li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--accent-magenta);
+        }
+
+        /* Projects Section */
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid transparent;
+            position: relative;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
+        }
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+        .project-content {
+            padding: 1.5rem;
+        }
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        .project-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .skill-tag {
+            background: rgba(0, 255, 255, 0.1);
+            color: var(--accent-blue);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+        .project-link {
+            color: var(--accent-magenta);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+        .project-link:hover {
+            color: var(--accent-blue);
+        }
+        .project-actions {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .project-card:hover .project-actions {
+            opacity: 1;
+        }
+        .project-action-btn {
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--text-primary);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .project-action-btn:hover {
+            background: var(--accent-gradient);
+        }
+
+        /* Add Project Section */
+        .add-project-section {
+            background: var(--secondary-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 2px dashed var(--accent-blue);
+        }
+        .add-project-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group label {
+            margin-bottom: 0.5rem;
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+        .form-group input,
+        .form-group textarea {
+            padding: 0.8rem;
+            background: var(--primary-bg);
+            border: 1px solid var(--accent-magenta);
+            border-radius: 5px;
+            color: var(--text-primary);
+            font-family: inherit;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+        .image-upload {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            width: 100%;
+        }
+        .image-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        .image-upload-label {
+            display: block;
+            padding: 2rem;
+            background: var(--primary-bg);
+            border: 2px dashed var(--accent-magenta);
+            border-radius: 10px;
+            text-align: center;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+        .image-upload:hover .image-upload-label {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+        .image-preview {
+            margin-top: 1rem;
+            max-width: 100%;
+            border-radius: 10px;
+            display: none;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            overflow: auto;
+        }
+        .modal-content {
+            background-color: var(--secondary-bg);
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid var(--accent-blue);
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+        }
+        .close-modal {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            color: var(--text-secondary);
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-modal:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+        .contact-item i {
+            color: var(--accent-blue);
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .social-link {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 255, 255, 0.1);
+            color: var(--accent-blue);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        .social-link:hover {
+            background: var(--accent-gradient);
+            color: var(--text-primary);
+            transform: translateY(-5px);
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 5%;
+            background-color: var(--secondary-bg);
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .about-container {
+                flex-direction: column;
+            }
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
+            .robot-popup {
+                width: 90%;
+                right: 5%;
+            }
+            .robot-3d-container {
+                width: 80px;
+                height: 80px;
+            }
+            .robot-head {
+                width: 60px;
+                height: 60px;
+            }
+            .robot-body {
+                width: 45px;
+                height: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">Rishabh Singh</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>Rishabh Singh</h1>
+        <p>Data Science Enthusiast | Python Developer | Machine Learning Specialist</p>
+        <a href="#projects" class="btn">View My Work</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title fade-in">About Me</h2>
+        <div class="about-container">
+            <div class="about-text slide-in-left">
+                <p>BCA graduate with a strong foundation in computer applications and growing expertise in data science. Proficient in Python, SQL, Machine Learning, and data visualization.</p>
+                <p>Passionate about solving real-world problems with data-driven solutions. Highly motivated, adaptable, and eager to contribute to a technology-driven environment.</p>
+                <p>Currently pursuing Bachelor of Computer Applications at LN College (Yashwantrao Chavan Maharashtra Open University) with expected graduation in July 2025.</p>
+            </div>
+            <div class="about-image slide-in-right">
+                
+                <img id="aboutImage" src="D:\My Data\Image/my_photo.png" alt="Rishabh Singh">
+                <div class="about-image-overlay">
+                    <button class="change-photo-btn" onclick="document.getElementById('aboutPhotoInput').click()">
+                        <i class="fas fa-camera"></i> Change Photo
+                    </button>
+                    <input type="file" id="aboutPhotoInput" style="display: none;" accept="image/*">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title fade-in">Technical Skills</h2>
+        <div class="skills-container">
+            <div class="skill-card scale-in">
+                <div class="skill-icon"><i class="fas fa-code"></i></div>
+                <h3 class="skill-title">Programming & Tools</h3>
+                <ul class="skill-list">
+                    <li>Python</li>
+                    <li>SQL</li>
+                    <li>Power BI</li>
+                    <li>Tableau</li>
+                    <li>MS Office Suite</li>
+                </ul>
+            </div>
+            <div class="skill-card scale-in">
+                <div class="skill-icon"><i class="fas fa-cogs"></i></div>
+                <h3 class="skill-title">Libraries & Frameworks</h3>
+                <ul class="skill-list">
+                    <li>NumPy</li>
+                    <li>Pandas</li>
+                    <li>Matplotlib</li>
+                    <li>Scikit-learn</li>
+                </ul>
+            </div>
+            <div class="skill-card scale-in">
+                <div class="skill-icon"><i class="fas fa-brain"></i></div>
+                <h3 class="skill-title">Concepts</h3>
+                <ul class="skill-list">
+                    <li>Machine Learning</li>
+                    <li>Regression</li>
+                    <li>Classification</li>
+                    <li>Clustering</li>
+                    <li>Deep Learning Basics</li>
+                </ul>
+            </div>
+            <div class="skill-card scale-in">
+                <div class="skill-icon"><i class="fas fa-users"></i></div>
+                <h3 class="skill-title">Soft Skills</h3>
+                <ul class="skill-list">
+                    <li>Problem Solving</li>
+                    <li>Team Collaboration</li>
+                    <li>Communication</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title fade-in">Projects</h2>
+        <div class="projects-container" id="projectsContainer">
+            <!-- Projects will be dynamically loaded here -->
+        </div>
+
+        <!-- Add Project Section -->
+        <div class="add-project-section fade-in">
+            <h3 style="color: var(--accent-blue); margin-bottom: 1.5rem;">Add New Project</h3>
+            <form class="add-project-form" id="addProjectForm">
+                <div class="form-group">
+                    <label for="projectTitle">Project Title</label>
+                    <input type="text" id="projectTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="projectDescription">Description</label>
+                    <textarea id="projectDescription" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="projectSkills">Skills (comma separated)</label>
+                    <input type="text" id="projectSkills" placeholder="Python, ML, Pandas" required>
+                </div>
+                <div class="form-group">
+                    <label for="projectGithub">GitHub URL</label>
+                    <input type="url" id="projectGithub" placeholder="https://github.com/...">
+                </div>
+                <div class="form-group">
+                    <label for="projectDemo">Live Demo URL</label>
+                    <input type="url" id="projectDemo" placeholder="https://...">
+                </div>
+                <div class="form-group">
+                    <label>Project Image</label>
+                    <div class="image-upload">
+                        <input type="file" id="projectImage" accept="image/*">
+                        <label for="projectImage" class="image-upload-label">
+                            <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                            <p>Click to upload project image</p>
+                        </label>
+                    </div>
+                    <img id="imagePreview" class="image-preview" alt="Preview">
+                </div>
+                <button type="submit" class="btn">Add Project</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title fade-in">Get In Touch</h2>
+        <div class="contact-container">
+            <p class="fade-in">I'm always interested in hearing about new opportunities and exciting projects. Feel free to reach out!</p>
+            <div class="contact-info">
+                <div class="contact-item fade-in">
+                    <i class="fas fa-envelope"></i>
+                    <span>singhrishabh5719@gmail.com</span>
+                </div>
+                <div class="contact-item fade-in">
+                    <i class="fas fa-phone"></i>
+                    <span>+91 80102 88596</span>
+                </div>
+                <div class="contact-item fade-in">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>100 Feet road Vasai West Thana- Maharashtra - 401202</span>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/rishabh-singh-datascience" class="social-link fade-in" target="_blank">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/singhrishabh5" class="social-link fade-in" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Rishabh Singh. All Rights Reserved.</p>
+    </footer>
+
+    <!-- 3D Robot Assistant -->
+    <div class="robot-3d-container" id="robot3d">
+        <div class="robot-3d">
+            <div class="robot-head">
+                <div class="robot-antenna"></div>
+                <div class="robot-eyes">
+                    <div class="robot-eye">
+                        <div class="robot-pupil" id="leftPupil"></div>
+                    </div>
+                    <div class="robot-eye">
+                        <div class="robot-pupil" id="rightPupil"></div>
+                    </div>
+                </div>
+                <div class="robot-mouth"></div>
+            </div>
+            <div class="robot-body"></div>
+        </div>
+    </div>
+
+    <!-- Robot Popup -->
+    <div class="robot-popup" id="robotPopup">
+        <button class="robot-close" id="robotClose"><i class="fas fa-times"></i></button>
+        <div class="robot-header">
+            <div class="robot-avatar">
+                <!-- CHANGE ROBOT ICON HERE (e.g., fa-brain, fa-user-astronaut) -->
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="robot-name">DataBot</div>
+        </div>
+        <div class="robot-message">
+            Welcome to Rishabh's Data Science Portfolio! I'm DataBot, your virtual assistant. Rishabh is a BCA graduate with expertise in Python, SQL, Machine Learning, and data visualization. His portfolio showcases projects ranging from health analytics platforms to interactive dashboards and game development. Feel free to explore his work and add your own projects using the form below!
+        </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator">
+        <i class="fas fa-chevron-down"></i>
+    </div>
+
+    <!-- Edit Project Modal -->
+    <div id="editProjectModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeEditModal">&times;</span>
+            <h2 style="color: var(--accent-blue); margin-bottom: 1.5rem;">Edit Project</h2>
+            <form id="editProjectForm">
+                <input type="hidden" id="editProjectId">
+                <div class="form-group">
+                    <label for="editProjectTitle">Project Title</label>
+                    <input type="text" id="editProjectTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="editProjectDescription">Description</label>
+                    <textarea id="editProjectDescription" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editProjectSkills">Skills (comma separated)</label>
+                    <input type="text" id="editProjectSkills" required>
+                </div>
+                <div class="form-group">
+                    <label for="editProjectGithub">GitHub URL</label>
+                    <input type="url" id="editProjectGithub">
+                </div>
+                <div class="form-group">
+                    <label for="editProjectDemo">Live Demo URL</label>
+                    <input type="url" id="editProjectDemo">
+                </div>
+                <div class="form-group">
+                    <label>Change Project Image</label>
+                    <div class="image-upload">
+                        <input type="file" id="editProjectImage" accept="image/*">
+                        <label for="editProjectImage" class="image-upload-label">
+                            <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                            <p>Click to upload new project image</p>
+                        </label>
+                    </div>
+                    <img id="editImagePreview" class="image-preview" alt="Preview">
+                </div>
+                <button type="submit" class="btn">Update Project</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Particle Background
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#00FFFF'
+                },
+                shape: {
+                    type: 'circle'
+                },
+                opacity: {
+                    value: 0.5,
+                    random: false
+                },
+                size: {
+                    value: 3,
+                    random: true
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#A500FF',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'grab'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+
+        // 3D Robot Eye Tracking
+        const robot3d = document.getElementById('robot3d');
+        const leftPupil = document.getElementById('leftPupil');
+        const rightPupil = document.getElementById('rightPupil');
+        const robotPopup = document.getElementById('robotPopup');
+        const robotClose = document.getElementById('robotClose');
+        const scrollIndicator = document.getElementById('scrollIndicator');
+
+        // Mouse tracking for robot eyes
+        document.addEventListener('mousemove', (e) => {
+            const rect = robot3d.getBoundingClientRect();
+            const robotCenterX = rect.left + rect.width / 2;
+            const robotCenterY = rect.top + rect.height / 2;
+            
+            const angle = Math.atan2(e.clientY - robotCenterY, e.clientX - robotCenterX);
+            const distance = Math.min(3, Math.hypot(e.clientX - robotCenterX, e.clientY - robotCenterY) / 50);
+            
+            const pupilX = Math.cos(angle) * distance;
+            const pupilY = Math.sin(angle) * distance;
+            
+            leftPupil.style.transform = `translate(calc(-50% + ${pupilX}px), calc(-50% + ${pupilY}px))`;
+            rightPupil.style.transform = `translate(calc(-50% + ${pupilX}px), calc(-50% + ${pupilY}px))`;
+            
+            // Robot head rotation
+            const rotateY = (e.clientX - robotCenterX) / 20;
+            const rotateX = -(e.clientY - robotCenterY) / 20;
+            robot3d.querySelector('.robot-3d').style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+        });
+
+        // Robot click to show popup
+        robot3d.addEventListener('click', () => {
+            robotPopup.style.display = robotPopup.style.display === 'block' ? 'none' : 'block';
+        });
+
+        robotClose.addEventListener('click', () => {
+            robotPopup.style.display = 'none';
+        });
+
+        // Scroll animations and indicator
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Update scroll indicator
+            if (scrollTop > lastScrollTop) {
+                scrollIndicator.innerHTML = '<i class="fas fa-chevron-down"></i>';
+            } else {
+                scrollIndicator.innerHTML = '<i class="fas fa-chevron-up"></i>';
+            }
+            
+            // Hide indicator at top and bottom
+            if (scrollTop === 0 || scrollTop + window.innerHeight >= document.documentElement.scrollHeight) {
+                scrollIndicator.style.opacity = '0';
+            } else {
+                scrollIndicator.style.opacity = '1';
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+
+        // SCROLL ANIMATION OBSERVER
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animation classes
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in');
+            animatedElements.forEach(el => observer.observe(el));
+        });
+
+        // LOCAL STORAGE FUNCTIONS
+        function saveToLocalStorage(key, data) {
+            localStorage.setItem(key, JSON.stringify(data));
+        }
+
+        function loadFromLocalStorage(key) {
+            const data = localStorage.getItem(key);
+            return data ? JSON.parse(data) : null;
+        }
+
+        // Initialize default projects if none exist
+        const defaultProjects = [
+            {
+                id: 1,
+                title: "Longevity Analytics Platform",
+                description: "Developed an end-to-end health span analytics platform with modules for data collection, cleaning, exploratory analysis, correlation studies, predictive modeling, and automated reporting.",
+                skills: ["Python", "Streamlit", "ML", "Pandas", "Scikit-learn"],
+                github: "#",
+                demo: "#",
+                // CHANGE PROJECT IMAGE 1 HERE
+                image: "D:\My Data\Image/long_evity_analytics.png"
+            },
+            {
+                id: 2,
+                title: "Social Media X Dashboard",
+                description: "Designed an interactive dashboard in Power BI to track engagement, impressions, follower growth, and user behavior. Automated data refresh and created visual KPIs to support social media strategy decisions.",
+                skills: ["Power BI", "Data Visualization", "DAX", "Data Modeling"],
+                github: "#",
+                demo: "#",
+                
+                image: "socialmediadashboard/400/200.jpg"
+            },
+            {
+                id: 3,
+                title: "3D Minecraft Clone",
+                description: "Built a 3D Minecraft-inspired game using Python with procedural terrain generation and real-time rendering. Implemented block-based environment creation, basic player controls, and camera movements.",
+                skills: ["Python", "Pygame", "Procedural Generation", "OOP"],
+                github: "#",
+                demo: "#",
+                
+                image: "minecraftclone/400/200.jpg"
+            },
+            {
+                id: 4,
+                title: "Secure Password Manager",
+                description: "Developed a password manager with strong encryption algorithms to securely store and retrieve user credentials. Implemented a master password system and basic GUI for ease of use.",
+                skills: ["Python", "Cryptography", "GUI", "Security"],
+                github: "#",
+                demo: "#",
+                
+                image: "passwordmanager/400/200.jpg"
+            },
+            {
+                id: 5,
+                title: "RhythmBells Music Player",
+                description: "Created a desktop music player with login authentication, playlist management, volume control, and playback options. Designed a custom UI with Tkinter and integrated multimedia handling for smooth playback.",
+                skills: ["Python", "Tkinter", "GUI", "Audio Processing"],
+                github: "#",
+                demo: "#",
+                
+                image: "musicplayer/400/200.jpg"
+            },
+            {
+                id: 6,
+                title: "Salary Prediction Model",
+                description: "Built a machine learning model to predict candidate salaries based on education, experience, and skills. Used regression techniques, feature engineering, and evaluation metrics like RMSE and R² score.",
+                skills: ["Python", "Machine Learning", "Pandas", "Scikit-learn"],
+                github: "#",
+                demo: "#",
+                // CHANGE PROJECT IMAGE 6 HERE
+                image: "salaryprediction/400/200.jpg"
+            }
+        ];
+
+        // Load data from localStorage or use defaults
+        let projects = loadFromLocalStorage('portfolioProjects') || defaultProjects;
+        let aboutImageSrc = loadFromLocalStorage('aboutImage') || 'rishabhprofile/300/300.jpg';
+        let nextProjectId = loadFromLocalStorage('nextProjectId') || 7;
+
+        // Set about image from localStorage
+        document.getElementById('aboutImage').src = aboutImageSrc;
+
+        // About photo change
+        const aboutPhotoInput = document.getElementById('aboutPhotoInput');
+        const aboutImage = document.getElementById('aboutImage');
+
+        aboutPhotoInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const newImageSrc = e.target.result;
+                    aboutImage.src = newImageSrc;
+                    saveToLocalStorage('aboutImage', newImageSrc);
+                    showNotification('Profile photo updated successfully!');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Function to render projects with animations
+        function renderProjects() {
+            const projectsContainer = document.getElementById('projectsContainer');
+            projectsContainer.innerHTML = '';
+            
+            projects.forEach((project, index) => {
+                const projectCard = document.createElement('div');
+                projectCard.className = 'project-card fade-in';
+                projectCard.setAttribute('data-id', project.id);
+                projectCard.style.animationDelay = `${index * 0.1}s`;
+                
+                const skillTags = project.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('');
+                const githubLink = project.github ? `<a href="${project.github}" class="project-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>` : '';
+                const demoLink = project.demo ? `<a href="${project.demo}" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>` : '';
+                
+                projectCard.innerHTML = `
+                    <div class="project-image">
+                        <img src="${project.image}" alt="${project.title}">
+                    </div>
+                    <div class="project-actions">
+                        <button class="project-action-btn edit-project-btn" data-id="${project.id}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="project-action-btn delete-project-btn" data-id="${project.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">${project.title}</h3>
+                        <p class="project-description">${project.description}</p>
+                        <div class="project-skills">
+                            ${skillTags}
+                        </div>
+                        <div class="project-links">
+                            ${githubLink}
+                            ${demoLink}
+                        </div>
+                    </div>
+                `;
+                
+                projectsContainer.appendChild(projectCard);
+            });
+            
+            // Re-attach event listeners
+            attachProjectButtonListeners();
+            
+            // Observe new project cards for animation
+            const newProjectCards = document.querySelectorAll('.project-card.fade-in');
+            newProjectCards.forEach(el => observer.observe(el));
+        }
+
+        // Initial render
+        renderProjects();
+
+        // Add Project Form
+        const addProjectForm = document.getElementById('addProjectForm');
+        const projectImage = document.getElementById('projectImage');
+        const imagePreview = document.getElementById('imagePreview');
+
+        // Image preview for add form
+        projectImage.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Form submission for adding projects
+        addProjectForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const title = document.getElementById('projectTitle').value;
+            const description = document.getElementById('projectDescription').value;
+            const skills = document.getElementById('projectSkills').value.split(',').map(s => s.trim());
+            const githubUrl = document.getElementById('projectGithub').value;
+            const demoUrl = document.getElementById('projectDemo').value;
+            const imageUrl = imagePreview.src || `https://picsum.photos/seed/${title.replace(/\s+/g, '')}/400/200.jpg`;
+            
+            // Create new project object
+            const newProject = {
+                id: nextProjectId,
+                title: title,
+                description: description,
+                skills: skills,
+                github: githubUrl,
+                demo: demoUrl,
+                image: imageUrl
+            };
+            
+            // Add to projects array
+            projects.push(newProject);
+            
+            // Save to localStorage
+            saveToLocalStorage('portfolioProjects', projects);
+            
+            // Increment and save next ID
+            nextProjectId++;
+            saveToLocalStorage('nextProjectId', nextProjectId);
+            
+            // Re-render projects
+            renderProjects();
+            
+            // Reset form
+            addProjectForm.reset();
+            imagePreview.style.display = 'none';
+            
+            // Show success message
+            showNotification('Project added successfully!');
+        });
+
+        // Edit Project Modal
+        const editProjectModal = document.getElementById('editProjectModal');
+        const closeEditModal = document.getElementById('closeEditModal');
+        const editProjectForm = document.getElementById('editProjectForm');
+        const editProjectImage = document.getElementById('editProjectImage');
+        const editImagePreview = document.getElementById('editImagePreview');
+
+        // Close modal when clicking on X
+        closeEditModal.addEventListener('click', () => {
+            editProjectModal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside of it
+        window.addEventListener('click', (e) => {
+            if (e.target === editProjectModal) {
+                editProjectModal.style.display = 'none';
+            }
+        });
+
+        // Image preview for edit form
+        editProjectImage.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    editImagePreview.src = e.target.result;
+                    editImagePreview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Form submission for editing projects
+        editProjectForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const projectId = parseInt(document.getElementById('editProjectId').value);
+            const projectIndex = projects.findIndex(p => p.id === projectId);
+            
+            if (projectIndex !== -1) {
+                // Update project data
+                projects[projectIndex].title = document.getElementById('editProjectTitle').value;
+                projects[projectIndex].description = document.getElementById('editProjectDescription').value;
+                projects[projectIndex].skills = document.getElementById('editProjectSkills').value.split(',').map(s => s.trim());
+                projects[projectIndex].github = document.getElementById('editProjectGithub').value;
+                projects[projectIndex].demo = document.getElementById('editProjectDemo').value;
+                
+                // Update image if new one was uploaded
+                if (editImagePreview.src && editImagePreview.style.display !== 'none') {
+                    projects[projectIndex].image = editImagePreview.src;
+                }
+                
+                // Save to localStorage
+                saveToLocalStorage('portfolioProjects', projects);
+                
+                // Re-render projects
+                renderProjects();
+                
+                // Close modal and show success message
+                editProjectModal.style.display = 'none';
+                showNotification('Project updated successfully!');
+            }
+        });
+
+        // Function to attach event listeners to project buttons
+        function attachProjectButtonListeners() {
+            // Edit buttons
+            document.querySelectorAll('.edit-project-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const projectId = parseInt(btn.getAttribute('data-id'));
+                    const project = projects.find(p => p.id === projectId);
+                    
+                    if (project) {
+                        // Populate form with current data
+                        document.getElementById('editProjectId').value = project.id;
+                        document.getElementById('editProjectTitle').value = project.title;
+                        document.getElementById('editProjectDescription').value = project.description;
+                        document.getElementById('editProjectSkills').value = project.skills.join(', ');
+                        document.getElementById('editProjectGithub').value = project.github;
+                        document.getElementById('editProjectDemo').value = project.demo;
+                        
+                        // Set image preview
+                        editImagePreview.src = project.image;
+                        editImagePreview.style.display = 'block';
+                        
+                        // Show modal
+                        editProjectModal.style.display = 'block';
+                    }
+                });
+            });
+            
+            // Delete buttons
+            document.querySelectorAll('.delete-project-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const projectId = parseInt(btn.getAttribute('data-id'));
+                    
+                    if (confirm('Are you sure you want to delete this project?')) {
+                        // Remove project from array
+                        projects = projects.filter(p => p.id !== projectId);
+                        
+                        // Save to localStorage
+                        saveToLocalStorage('portfolioProjects', projects);
+                        
+                        // Re-render projects
+                        renderProjects();
+                        
+                        showNotification('Project deleted successfully!');
+                    }
+                });
+            });
+        }
+
+        // Function to show notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--accent-gradient);
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 10px;
+                z-index: 1000;
+                animation: fadeInUp 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'fadeOut 0.3s ease-out';
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // Add fade out animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Active Navigation Highlight
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
